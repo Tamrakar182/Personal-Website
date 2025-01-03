@@ -24,7 +24,7 @@ function HeroSection() {
           </div>
           <BlurFade delay={BLUR_FADE_DELAY}>
             <Avatar className='size-28 border'>
-              <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
+              <AvatarImage alt={DATA.name} className='w-16 h-16' src={DATA.avatarUrl} />
               <AvatarFallback>{DATA.initials}</AvatarFallback>
             </Avatar>
           </BlurFade>

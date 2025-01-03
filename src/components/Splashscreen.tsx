@@ -15,6 +15,7 @@ const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
       parent: gameRef.current,
       transparent: false,
       backgroundColor: '#08090a',
+      noAudio: true,
       scale: {
         mode: Phaser.Scale.RESIZE,
         width: window.innerWidth,
