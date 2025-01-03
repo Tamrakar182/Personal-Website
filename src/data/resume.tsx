@@ -5,6 +5,7 @@ export const DATA = {
   name: 'Manjul Tamrakar',
   initials: 'MT',
   url: 'https://github.com/Tamrakar182',
+  avatarUrl: 'https://avatars.githubusercontent.com/u/77426508?v=4',
   location: 'Lalitpur District, Nepal',
   locationLink: 'https://www.google.com/maps/place/lalitpur',
   description:
