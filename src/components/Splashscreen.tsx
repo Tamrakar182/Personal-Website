@@ -32,7 +32,7 @@ const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
     const game = new Phaser.Game(config);
 
     function preload() {
-      this.load.image('dragon', '/public/img/dragon.png');
+      this.load.image('dragon', '/img/dragon.png');
     }
 
     function create() {
