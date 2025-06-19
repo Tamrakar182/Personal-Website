@@ -5,6 +5,7 @@
 import { FC, useRef, useState, useEffect, MutableRefObject } from 'react';
 import { mat4, quat, vec2, vec3 } from 'gl-matrix';
 import { Link } from 'react-router';
+import { Link as LinkIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useTheme } from '@/components/ThemeProvider';
 
@@ -1424,6 +1425,15 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
     };
   }, [items]);
 
+  const handleButtonClick = () => {
+    if (!activeItem?.link) return;
+    if (activeItem.link.startsWith('http')) {
+      window.open(activeItem.link, '_blank');
+    } else {
+      console.log('Internal route:', activeItem.link);
+    }
+  };
+
   return (
     <div className='relative w-full h-full'>
       <canvas
@@ -1550,7 +1560,7 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
               },
             )}
           >
-            <Link className='select-none relative text-foreground text-[26px]' />
+            <LinkIcon className='select-none relative text-foreground text-[26px]' />
           </div>
         </>
       )}
