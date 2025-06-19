@@ -1527,7 +1527,7 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
               'block lg:hidden',
               'text-2xl sm:text-3xl md:text-4xl',
               'left-1/2 transform -translate-x-1/2',
-              'bottom-20 sm:bottom-24 md:bottom-28',
+              'bottom-[25%] sm:bottom-[30%] md:bottom-[40%]',
               'max-w-[calc(80vw-2rem)] text-center',
               'break-words hyphens-auto',
               'cursor-pointer',
