@@ -93,7 +93,6 @@ void main() {
 }
 `;
 
-
 class Face {
   public a: number;
   public b: number;
@@ -977,40 +976,57 @@ class InfiniteGridMenu {
       }
     };
 
+    const drawImageToCell = (img: HTMLImageElement, cellIndex: number) => {
+      const x = (cellIndex % this.atlasSize) * cellSize;
+      const y = Math.floor(cellIndex / this.atlasSize) * cellSize;
+
+      // Clear the cell first
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(x, y, cellSize, cellSize);
+
+      // Calculate scale to cover the entire cell (crop excess)
+      const imgAspect = img.width / img.height;
+      const cellAspect = 1; // Square cells
+      let scale: number;
+      let drawWidth: number;
+      let drawHeight: number;
+      let offsetX: number;
+      let offsetY: number;
+
+      if (imgAspect > cellAspect) {
+        // Image is wider - scale to fit height, crop width
+        scale = cellSize / img.height;
+        drawWidth = img.width * scale;
+        drawHeight = cellSize;
+        offsetX = (cellSize - drawWidth) / 2;
+        offsetY = 0;
+      } else {
+        // Image is taller - scale to fit width, crop height
+        scale = cellSize / img.width;
+        drawWidth = cellSize;
+        drawHeight = img.height * scale;
+        offsetX = 0;
+        offsetY = (cellSize - drawHeight) / 2;
+      }
+
+      // Save context and clip to cell boundaries
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(x, y, cellSize, cellSize);
+      ctx.clip();
+
+      // Draw the scaled and positioned image
+      ctx.drawImage(img, x + offsetX, y + offsetY, drawWidth, drawHeight);
+
+      ctx.restore();
+    };
+
     this.items.forEach((item, i) => {
       const img = new Image();
       img.crossOrigin = 'anonymous';
 
       img.onload = () => {
-        const x = (i % this.atlasSize) * cellSize;
-        const y = Math.floor(i / this.atlasSize) * cellSize;
-
-        // Calculate scaling to fit image in cell while maintaining aspect ratio
-        const imgAspect = img.width / img.height;
-        const cellAspect = 1; // Square cells
-
-        let drawWidth = cellSize;
-        let drawHeight = cellSize;
-        let drawX = x;
-        let drawY = y;
-
-        if (imgAspect > cellAspect) {
-          // Image is wider, fit to height
-          drawWidth = cellSize * imgAspect;
-          drawX = x - (drawWidth - cellSize) / 2;
-        } else {
-          // Image is taller, fit to width
-          drawHeight = cellSize / imgAspect;
-          drawY = y - (drawHeight - cellSize) / 2;
-        }
-
-        // Clear the cell first
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(x, y, cellSize, cellSize);
-
-        // Draw the image
-        ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
-
+        drawImageToCell(img, i);
         loadedImages++;
         checkAllLoaded();
       };
@@ -1222,7 +1238,7 @@ class InfiniteGridMenu {
     gl.uniform1f(this.discLocations.uScaleFactor, this.scaleFactor);
 
     gl.uniform1i(this.discLocations.uTex, 0); // Update the fragment shader source
-    
+
     gl.activeTexture(gl.TEXTURE0);
     gl.bindTexture(gl.TEXTURE_2D, this.tex);
 
@@ -1429,7 +1445,14 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
         <>
           <h2
             className={cn(
-              'select-none absolute text-foreground [font-size:4rem] left-[1.6em] top-1/2 transform translate-x-[20%] -translate-y-1/2 transition-all ease-smooth',
+              'select-none absolute text-foreground font-bold leading-tight transition-all ease-smooth',
+              // Mobile styles
+              'text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl',
+              'left-4 sm:left-6 md:left-8 lg:left-12 xl:left-16',
+              'top-1/2 transform -translate-y-1/2',
+              // Responsive max width to prevent overflow
+              'max-w-[calc(50vw-2rem)] sm:max-w-[calc(45vw-3rem)] md:max-w-[calc(40vw-4rem)]',
+              'break-words hyphens-auto',
               {
                 'opacity-0 pointer-events-none duration-100': isMoving,
                 'opacity-100 pointer-events-auto duration-500': !isMoving,
@@ -1441,12 +1464,17 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
 
           <p
             className={cn(
-              'select-none absolute max-w-[10ch] text-[1.5rem] top-1/2 text-foreground right-[1%] transition-all ease-smooth',
+              'select-none absolute text-foreground transition-all ease-smooth leading-relaxed',
+              // Mobile styles
+              'text-sm sm:text-base md:text-lg lg:text-xl',
+              'right-4 sm:right-6 md:right-8 lg:right-12 xl:right-16',
+              'top-1/2 transform -translate-y-1/2',
+              // Responsive max width
+              'max-w-[calc(45vw-2rem)] sm:max-w-[calc(40vw-3rem)] md:max-w-[calc(35vw-4rem)]',
+              'text-right break-words hyphens-auto',
               {
-                'opacity-0 pointer-events-none duration-100 translate-x-[-60%] -translate-y-1/2':
-                  isMoving,
-                'opacity-100 pointer-events-auto duration-500 translate-x-[-90%] -translate-y-1/2':
-                  !isMoving,
+                'opacity-0 pointer-events-none duration-100': isMoving,
+                'opacity-100 pointer-events-auto duration-500': !isMoving,
               },
             )}
           >
@@ -1456,11 +1484,14 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
           <div
             onClick={handleButtonClick}
             className={cn(
-              'absolute left-1/2 z-10 w-[60px] h-[60px] grid place-items-center bg-background border-[5px] border-foreground rounded-full cursor-pointer transition-all ease-smooth  hover:scale-110',
+              'absolute left-1/2 z-10 grid place-items-center bg-background border-foreground rounded-full cursor-pointer transition-all ease-smooth hover:scale-110',
+              // Responsive button size
+              'w-12 h-12 border-2 sm:w-14 sm:h-14 sm:border-3 md:w-16 md:h-16 md:border-4 lg:w-20 lg:h-20 lg:border-[5px]',
               {
                 'bottom-[-80px] opacity-0 pointer-events-none duration-100 scale-0 -translate-x-1/2':
                   isMoving,
-                'bottom-[3.8em] opacity-100 pointer-events-auto duration-500 scale-100 -translate-x-1/2':
+                // Responsive bottom positioning
+                'bottom-8 sm:bottom-12 md:bottom-16 lg:bottom-20 opacity-100 pointer-events-auto duration-500 scale-100 -translate-x-1/2':
                   !isMoving,
               },
             )}
