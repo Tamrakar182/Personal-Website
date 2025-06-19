@@ -1,35 +1,24 @@
-import SplashScreen from './components/Splashscreen';
-import { useState, useEffect } from 'react';
 import HomePage from './page';
 import Providers from './components/Providers';
+import { Route, Routes, HashRouter } from 'react-router';
+import ProjectPage from './page/project';
 
 function App() {
-  const [splashLoaded, setSplashLoaded] = useState(false);
-
-  useEffect(() => {
-    const loaded = sessionStorage.getItem('splashLoaded');
-    if (loaded) {
-      setSplashLoaded(true);
-    }
-  }, []);
-
-  const handleSplashComplete = () => {
-    setSplashLoaded(true);
-  };
-
-  if (!splashLoaded) {
-    return (
-      <div className='min-h-screen bg-[#08090a] flex items-center justify-center'>
-        <SplashScreen onComplete={handleSplashComplete} />
-      </div>
-    );
-  }
-
   return (
     <Providers>
-      <div className='min-h-screen bg-background font-sans antialiased max-w-2xl mx-auto py-12 sm:py-24 px-6'>
-        <HomePage />
-      </div>
+      <HashRouter>
+        <Routes>
+          <Route
+            index
+            element={
+              <div className='min-h-screen bg-background font-sans antialiased max-w-2xl mx-auto py-12 sm:py-24 px-6'>
+                <HomePage />
+              </div>
+            }
+          />
+          <Route path='projects' element={<ProjectPage />} />
+        </Routes>
+      </HashRouter>
     </Providers>
   );
 }

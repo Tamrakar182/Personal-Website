@@ -23,7 +23,7 @@ export const DATA = {
   ],
   navbar: [
     { href: '/', icon: HomeIcon, label: 'Home' },
-    { href: '/blog', icon: NotebookIcon, label: 'Blog' },
+    { href: '#/projects', icon: NotebookIcon, label: 'Projects' },
   ],
   contact: {
     email: 'manjultamrakar4@gmail.com',
@@ -41,15 +41,9 @@ export const DATA = {
         icon: Icons.linkedin,
         navbar: true,
       },
-      Devpost: {
-        name: 'Devpost',
-        url: 'https://devpost.com/Tamrakar182',
-        icon: Icons.globe,
-        navbar: true,
-      },
       email: {
         name: 'Send Email',
-        url: '#',
+        url: 'mailto:manjultamrakar4@gmail.com',
         icon: Icons.email,
         navbar: false,
       },

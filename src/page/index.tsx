@@ -1,7 +1,6 @@
 import HeroSection from '@/sections/HeroSection';
 import ContactSection from '@/sections/ContactSection';
 import HackathonSection from '@/sections/HackathonSection';
-import ProjectsSection from '@/sections/ProjectsSection';
 import SkillsSection from '@/sections/SkillsSection';
 import EducationSection from '@/sections/EducationSection';
 import WorkSection from '@/sections/WorkSection';
@@ -15,7 +14,6 @@ function HomePage() {
       <WorkSection />
       <EducationSection />
       <SkillsSection />
-      <ProjectsSection />
       <HackathonSection />
       <ContactSection />
     </main>

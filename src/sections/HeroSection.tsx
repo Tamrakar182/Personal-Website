@@ -1,7 +1,5 @@
-import BlurFade from '@/components/ui/blur-fade';
 import BlurFadeText from '@/components/ui/fade-text';
 import { DATA } from '@/data/resume';
-import { Avatar, AvatarImage, AvatarFallback } from '@radix-ui/react-avatar';
 import { BLUR_FADE_DELAY } from '@/constants';
 
 function HeroSection() {
@@ -22,12 +20,6 @@ function HeroSection() {
               text={DATA.description}
             />
           </div>
-          <BlurFade delay={BLUR_FADE_DELAY}>
-            <Avatar className='size-28 border'>
-              <AvatarImage alt={DATA.name} className='w-16 h-16' src={DATA.avatarUrl} />
-              <AvatarFallback>{DATA.initials}</AvatarFallback>
-            </Avatar>
-          </BlurFade>
         </div>
       </div>
     </section>
