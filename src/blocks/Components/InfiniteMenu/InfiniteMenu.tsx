@@ -4,7 +4,7 @@
 
 import { FC, useRef, useState, useEffect, MutableRefObject } from 'react';
 import { mat4, quat, vec2, vec3 } from 'gl-matrix';
-import { Link } from 'lucide-react';
+import { Link } from 'react-router';
 import { cn } from '@/lib/utils';
 import { useTheme } from '@/components/ThemeProvider';
 
@@ -1424,15 +1424,6 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
     };
   }, [items]);
 
-  const handleButtonClick = () => {
-    if (!activeItem?.link) return;
-    if (activeItem.link.startsWith('http')) {
-      window.open(activeItem.link, '_blank');
-    } else {
-      console.log('Internal route:', activeItem.link);
-    }
-  };
-
   return (
     <div className='relative w-full h-full'>
       <canvas
@@ -1441,18 +1432,50 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
         className='cursor-grab w-full h-full overflow-hidden relative outline-none active:cursor-grabbing'
       />
 
+      {/* Canvas blur overlay for text areas */}
+      <div
+        className={cn(
+          'absolute inset-0 pointer-events-none transition-all ease-smooth',
+          {
+            'opacity-0 duration-100': isMoving,
+            'opacity-60 duration-500': !isMoving,
+          },
+        )}
+        style={{
+          backdropFilter: 'blur(4px) saturate(0.3)',
+          WebkitBackdropFilter: 'blur(4px) saturate(0.3)',
+          mask: `
+            radial-gradient(ellipse 80% 60% at center, 
+              black 0%, 
+              black 20%, 
+              transparent 70%
+            )
+          `,
+          WebkitMask: `
+            radial-gradient(ellipse 80% 60% at center, 
+              black 0%, 
+              black 20%, 
+              transparent 70%
+            )
+          `,
+        }}
+      />
+
       {activeItem && (
         <>
+          {/* Desktop Title - Left Side */}
           <h2
             className={cn(
-              'select-none absolute text-foreground font-bold leading-tight transition-all ease-smooth',
-              // Mobile styles
-              'text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl',
-              'left-4 sm:left-6 md:left-8 lg:left-12 xl:left-16',
+              'select-none absolute text-foreground font-bold leading-tight transition-all ease-smooth z-10',
+              // Desktop styles (horizontal layout)
+              'hidden lg:block',
+              'text-4xl lg:text-5xl xl:text-6xl',
+              'left-8 lg:left-12 xl:left-16',
               'top-1/2 transform -translate-y-1/2',
-              // Responsive max width to prevent overflow
-              'max-w-[calc(50vw-2rem)] sm:max-w-[calc(45vw-3rem)] md:max-w-[calc(40vw-4rem)]',
+              'max-w-[calc(40vw-4rem)]',
               'break-words hyphens-auto',
+              // Text shadow for better readability
+              'drop-shadow-lg',
               {
                 'opacity-0 pointer-events-none duration-100': isMoving,
                 'opacity-100 pointer-events-auto duration-500': !isMoving,
@@ -1462,16 +1485,19 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
             {activeItem.title}
           </h2>
 
+          {/* Desktop Description - Right Side */}
           <p
             className={cn(
-              'select-none absolute text-foreground transition-all ease-smooth leading-relaxed',
-              // Mobile styles
-              'text-sm sm:text-base md:text-lg lg:text-xl',
-              'right-4 sm:right-6 md:right-8 lg:right-12 xl:right-16',
+              'select-none absolute text-foreground transition-all ease-smooth leading-relaxed z-10',
+              // Desktop styles (horizontal layout)
+              'hidden lg:block',
+              'text-lg lg:text-xl',
+              'right-8 lg:right-12 xl:right-16',
               'top-1/2 transform -translate-y-1/2',
-              // Responsive max width
-              'max-w-[calc(45vw-2rem)] sm:max-w-[calc(40vw-3rem)] md:max-w-[calc(35vw-4rem)]',
+              'max-w-[calc(35vw-4rem)]',
               'text-right break-words hyphens-auto',
+              // Text shadow for better readability
+              'drop-shadow-lg',
               {
                 'opacity-0 pointer-events-none duration-100': isMoving,
                 'opacity-100 pointer-events-auto duration-500': !isMoving,
@@ -1481,17 +1507,45 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
             {activeItem.description}
           </p>
 
+          {/* Mobile/Tablet Title - Bottom */}
+          <Link
+            to={activeItem?.link ?? ''}
+            target='_blank'
+            className={cn(
+              'select-none absolute underline text-foreground font-bold leading-tight transition-all ease-smooth z-10',
+              // Mobile/Tablet styles (vertical layout)
+              'block lg:hidden',
+              'text-2xl sm:text-3xl md:text-4xl',
+              'left-1/2 transform -translate-x-1/2',
+              'bottom-20 sm:bottom-24 md:bottom-28',
+              'max-w-[calc(80vw-2rem)] text-center',
+              'break-words hyphens-auto',
+              'cursor-pointer',
+              // Text shadow for better readability
+              'drop-shadow-lg',
+              {
+                'opacity-0 pointer-events-none duration-100': isMoving,
+                'opacity-100 pointer-events-auto duration-500': !isMoving,
+              },
+            )}
+          >
+            {activeItem.title}
+          </Link>
+
+          {/* Desktop Link Button - Center Bottom */}
           <div
             onClick={handleButtonClick}
             className={cn(
-              'absolute left-1/2 z-10 grid place-items-center bg-background border-foreground rounded-full cursor-pointer transition-all ease-smooth hover:scale-110',
-              // Responsive button size
-              'w-12 h-12 border-2 sm:w-14 sm:h-14 sm:border-3 md:w-16 md:h-16 md:border-4 lg:w-20 lg:h-20 lg:border-[5px]',
+              'absolute left-1/2 z-20 grid place-items-center bg-background border-foreground rounded-full cursor-pointer transition-all ease-smooth hover:scale-110',
+              // Desktop styles
+              'hidden lg:grid',
+              'w-20 h-20 border-[5px]',
+              // Enhanced shadow for better visibility
+              'shadow-lg drop-shadow-lg',
               {
                 'bottom-[-80px] opacity-0 pointer-events-none duration-100 scale-0 -translate-x-1/2':
                   isMoving,
-                // Responsive bottom positioning
-                'bottom-8 sm:bottom-12 md:bottom-16 lg:bottom-20 opacity-100 pointer-events-auto duration-500 scale-100 -translate-x-1/2':
+                'bottom-20 opacity-100 pointer-events-auto duration-500 scale-100 -translate-x-1/2':
                   !isMoving,
               },
             )}
