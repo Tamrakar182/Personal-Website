@@ -3,6 +3,6 @@
   "compatibility_date": "2025-06-21",
   "assets": {
     "directory": "./dist",
-    "html_handling": "force-trailing-slashes"
+    "html_handling": "force-trailing-slash"
   }
 }
