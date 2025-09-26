@@ -1,35 +1,127 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <!-- Add manifest link -->
-    <link rel="manifest" href="/site.webmanifest">
-    
-    <!-- Favicons -->
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    
-    <!-- PWA Meta Tags -->
-    <meta name="theme-color" content="#08090a"/>
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Manjul Tamrakar">
-    
-    <!-- iOS Meta Tags -->
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💭</text></svg>">
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Manjul Tamrakar</title>
+    <head>
+        <meta charset="UTF-8" />
 
-    <!-- Description for SEO and sharing -->
-    <meta name="description" content="Personal website of Manjul Tamrakar">
-  </head>
-  <body>
-    <div id="root" class="custom-cursor"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+        <!-- Manifest -->
+        <link rel="manifest" href="/site.webmanifest" />
+
+        <!-- Favicons -->
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="192x192"
+            href="/android-chrome-192x192.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="512x512"
+            href="/android-chrome-512x512.png"
+        />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+        />
+
+        <!-- PWA Meta Tags -->
+        <meta name="theme-color" content="#08090a" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="apple-mobile-web-app-title" content="Manjul Tamrakar" />
+
+        <!-- iOS Meta Tags -->
+        <link
+            rel="apple-touch-icon"
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💭</text></svg>"
+        />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Manjul Tamrakar</title>
+
+        <!-- SEO -->
+        <meta
+            name="description"
+            content="Personal website of Manjul Tamrakar"
+        />
+
+        <style>
+            body {
+                margin: 40px auto;
+                max-width: 650px;
+                line-height: 1.6;
+                font-size: 18px;
+                color: #444;
+                padding: 0 10px;
+            }
+            h1,
+            h2,
+            h3 {
+                line-height: 1.2;
+            }
+        </style>
+    </head>
+
+    <body>
+        <main role="main">
+            <header>
+                <div>
+                    <h1>Manjul Tamrakar</h1>
+                    <p>Software engineer</p>
+                </div>
+            </header>
+
+            <section>
+                <h3>About</h3>
+                <p style="color: var(--muted); margin: 6px 0 0">
+                    Developer experienced with web tooling, open-source projects
+                    and automation.
+                </p>
+            </section>
+
+            <section>
+                <h3>Skills & interests</h3>
+                <ul>
+                    <li>Web · JavaScript/TypeScript</li>
+                    <li>Mobile · React Native/Kotlin (Jetpack Compose)</li>
+                    <li>Backend · Go / Node.js</li>
+                    <li>Dev tooling · CI/CD</li>
+                    <li>Open Source</li>
+                </ul>
+            </section>
+
+            <div>
+                <div>
+                    Quick links:
+                    <a
+                        href="https://github.com/Tamrakar182"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >GitHub</a
+                    >
+                    ·
+                    <a
+                        href="https://www.linkedin.com/in/manjul-tamrakar/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >LinkedIn</a
+                    >
+                </div>
+            </div>
+        </main>
+    </body>
 </html>
