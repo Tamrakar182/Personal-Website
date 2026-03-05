@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.5",
   "type": "module",
+  "packageManager": "bun@1.2.15",
   "homepage": "https://manjultamrakar.com.np",
   "scripts": {
     "dev": "vite",
