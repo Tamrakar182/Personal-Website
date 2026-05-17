@@ -1,0 +1,96 @@
+@font-face {
+    font-family: "Rodin Pro";
+    src: url("/font/RodinPro.otf") format("opentype");
+    font-weight: 400 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --yorha-black: #14110c;
+    --yorha-black-deep: #0f0d0a;
+    --yorha-panel: #24211b;
+    --yorha-text: #dfdbd2;
+    --yorha-text-muted: #969188;
+    --yorha-logo-faint: rgba(121, 115, 106, 0.22);
+
+    --crt-cyan: rgba(64, 255, 255, 0.55);
+    --crt-red: rgba(255, 45, 45, 0.42);
+}
+
+@view-transition {
+    navigation: auto;
+}
+
+::view-transition-group(root) {
+    animation-duration: 760ms;
+    animation-timing-function: steps(10, end);
+}
+
+html::view-transition-old(root) {
+    animation: nier-vt-old 760ms steps(10, end) forwards;
+}
+
+html::view-transition-new(root) {
+    animation: nier-vt-new 760ms steps(10, end) forwards;
+}
+
+@keyframes nier-vt-old {
+    0% {
+        opacity: 1;
+        filter: brightness(1) contrast(1);
+        transform: scale(1);
+    }
+
+    32% {
+        opacity: 1;
+        filter: brightness(2.7) contrast(2.1);
+        transform: scaleY(1);
+    }
+
+    52% {
+        opacity: 1;
+        filter: brightness(3.2) contrast(2.6);
+        transform: scaleY(0.04);
+    }
+
+    100% {
+        opacity: 0;
+        filter: brightness(0);
+        transform: scaleY(0.015);
+    }
+}
+
+@keyframes nier-vt-new {
+    0% {
+        opacity: 0;
+        filter: brightness(0) contrast(2.4);
+        transform: scaleY(0.015);
+    }
+
+    34% {
+        opacity: 1;
+        filter: brightness(2.7) contrast(2.2);
+        transform: scaleY(0.04);
+    }
+
+    64% {
+        opacity: 1;
+        filter: brightness(1.35) contrast(1.4);
+        transform: scaleY(1);
+    }
+
+    100% {
+        opacity: 1;
+        filter: brightness(1) contrast(1);
+        transform: scaleY(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(root),
+    html::view-transition-old(root),
+    html::view-transition-new(root) {
+        animation: none !important;
+    }
+}
