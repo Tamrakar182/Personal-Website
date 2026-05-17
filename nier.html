@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <meta name="theme-color" content="#14110c" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>UNDER CONSTRUCTION</title>
+    <meta name="description" content="Under construction." />
+
+    <style>
+        @font-face {
+            font-family: "Rodin Pro";
+            src: url("/fonts/RodinPro.woff2") format("woff2");
+            font-weight: 400 800;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --bg: #14110c;
+            --text: #dfdbd2;
+            --text-muted: rgba(223, 219, 210, 0.62);
+            --line: rgba(223, 219, 210, 0.28);
+            --crt-cyan: rgba(64, 255, 255, 0.48);
+            --crt-red: rgba(255, 45, 45, 0.38);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            min-height: 100%;
+            background: var(--bg);
+        }
+
+        body {
+            min-height: 100svh;
+            width: 100%;
+            margin: 0;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at center, rgba(223, 219, 210, 0.08), transparent 42%),
+                radial-gradient(circle at 85% 12%, rgba(223, 219, 210, 0.06), transparent 18%),
+                var(--bg);
+            color: var(--text);
+            font-family: "Rodin Pro", sans-serif;
+            letter-spacing: 0.08em;
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+            width: calc(100% - 32px);
+            max-width: 760px;
+            min-width: 0;
+            padding: clamp(24px, 5vw, 72px);
+            border: 1px solid var(--line);
+            background: rgba(20, 17, 12, 0.54);
+            text-align: center;
+            isolation: isolate;
+            overflow: hidden;
+        }
+
+        h1 {
+            max-width: 100%;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+
+            font-size: clamp(1.35rem, 6.8vw, 4.2rem);
+            line-height: 1;
+            font-weight: 700;
+            letter-spacing: 0.035em;
+            text-transform: uppercase;
+
+            text-shadow:
+                -2px 0 var(--crt-cyan),
+                2px 0 var(--crt-red),
+                0 0 18px rgba(223, 219, 210, 0.24);
+
+            animation: textWarp 2.8s steps(2, end) infinite;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                repeating-linear-gradient(0deg,
+                    rgba(255, 255, 255, 0.035) 0px,
+                    rgba(255, 255, 255, 0.035) 1px,
+                    transparent 1px,
+                    transparent 4px),
+                repeating-linear-gradient(90deg,
+                    rgba(255, 255, 255, 0.018) 0px,
+                    rgba(255, 255, 255, 0.018) 1px,
+                    transparent 1px,
+                    transparent 5px);
+            opacity: 0.72;
+            mix-blend-mode: overlay;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse at center, transparent 46%, rgba(0, 0, 0, 0.45) 100%),
+                linear-gradient(180deg,
+                    transparent 0%,
+                    rgba(255, 255, 255, 0.055) 50%,
+                    transparent 100%);
+            box-shadow: inset 0 0 96px rgba(0, 0, 0, 0.82);
+            animation: crtRoll 5.5s linear infinite;
+        }
+
+        main::before,
+        main::after {
+            content: "";
+            position: absolute;
+            left: 24px;
+            right: 24px;
+            height: 1px;
+            background: var(--line);
+        }
+
+        main::before {
+            top: 18px;
+        }
+
+        main::after {
+            bottom: 18px;
+        }
+
+        .code {
+            margin-bottom: 18px;
+            color: var(--text-muted);
+            font-size: clamp(0.72rem, 1.2vw, 0.92rem);
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            margin: 24px 0 0;
+            color: var(--text-muted);
+            font-size: clamp(0.78rem, 1.35vw, 1rem);
+            line-height: 1.7;
+            text-transform: uppercase;
+        }
+
+        .cursor {
+            display: inline-block;
+            margin-left: 0.2em;
+            animation: blink 620ms steps(1, end) infinite;
+        }
+
+        html.from-nier-transition {
+            background: var(--bg);
+        }
+
+        html.from-nier-transition body {
+            opacity: 0;
+            transform: scale(1.018);
+            filter: brightness(0.7) contrast(1.18);
+        }
+
+        html.from-nier-transition.nier-transition-ready body {
+            opacity: 1;
+            transform: scale(1);
+            filter: brightness(1) contrast(1);
+            transition:
+                opacity 520ms steps(8, end),
+                transform 520ms steps(8, end),
+                filter 520ms steps(8, end);
+        }
+
+        html.from-nier-transition::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            pointer-events: none;
+            background:
+                repeating-linear-gradient(0deg,
+                    rgba(255, 255, 255, 0.04) 0px,
+                    rgba(255, 255, 255, 0.04) 1px,
+                    transparent 1px,
+                    transparent 4px),
+                var(--bg);
+            opacity: 1;
+            animation: nierCoverOut 620ms steps(10, end) forwards;
+        }
+
+        @keyframes blink {
+
+            0%,
+            48% {
+                opacity: 1;
+            }
+
+            49%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes textWarp {
+
+            0%,
+            100% {
+                transform: skewX(0deg) translateX(0);
+            }
+
+            48% {
+                transform: skewX(0deg) translateX(0);
+            }
+
+            49% {
+                transform: skewX(-0.35deg) translateX(-1px);
+            }
+
+            50% {
+                transform: skewX(0.28deg) translateX(2px);
+            }
+
+            51% {
+                transform: skewX(0deg) translateX(0);
+            }
+        }
+
+        @keyframes crtRoll {
+            from {
+                background-position: 0 -100vh, 0 -100vh;
+            }
+
+            to {
+                background-position: 0 100vh, 0 100vh;
+            }
+        }
+
+        @keyframes nierCoverOut {
+            0% {
+                opacity: 1;
+                transform: scaleY(1);
+                filter: brightness(1.2) contrast(1.4);
+            }
+
+            42% {
+                opacity: 1;
+                transform: scaleY(1);
+                filter: brightness(2.4) contrast(2);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scaleY(0.015);
+                filter: brightness(0);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+
+            html.from-nier-transition body {
+                opacity: 1;
+                transform: none;
+                filter: none;
+            }
+
+            html.from-nier-transition::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            main {
+                width: calc(100% - 20px);
+                padding: 28px 14px;
+            }
+
+            main::before,
+            main::after {
+                left: 14px;
+                right: 14px;
+            }
+
+            .code,
+            .subtitle {
+                letter-spacing: 0.08em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: clamp(1.1rem, 5.8vw, 2rem);
+                letter-spacing: 0.015em;
+            }
+        }
+    </style>
+
+    <script>
+        if (sessionStorage.getItem("nierRevealTransition") === "1") {
+            sessionStorage.removeItem("nierRevealTransition");
+            document.documentElement.classList.add("from-nier-transition");
+
+            window.addEventListener("DOMContentLoaded", () => {
+                requestAnimationFrame(() => {
+                    document.documentElement.classList.add("nier-transition-ready");
+                });
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <main>
+        <div class="code">YoRHa Archive Access</div>
+        <h1>UNDER<br />CONSTRUCTION</h1>
+        <p class="subtitle">System module unavailable<span class="cursor">_</span></p>
+    </main>
+</body>
+
+</html>
