@@ -388,6 +388,32 @@
             animation: nierCoverIn 620ms steps(10, end) forwards;
         }
 
+        .nier-transition-cover.is-returning {
+            opacity: 1;
+            transform: scaleY(1);
+            animation: nierCoverOut 620ms steps(10, end) forwards;
+        }
+
+        @keyframes nierCoverOut {
+            0% {
+                opacity: 1;
+                transform: scaleY(1);
+                filter: brightness(1.2) contrast(1.4);
+            }
+
+            42% {
+                opacity: 1;
+                transform: scaleY(1);
+                filter: brightness(2.4) contrast(2);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scaleY(0.015);
+                filter: brightness(0);
+            }
+        }
+
         @keyframes nierCoverIn {
             0% {
                 opacity: 0;
@@ -753,6 +779,37 @@
 
         let isNierLoading = false;
 
+        function resetNierTransitionState() {
+            isNierLoading = false;
+
+            nierTerminal.textContent = "";
+
+            nierLoader.classList.remove("is-active", "is-exiting", "is-opening");
+            nierLoader.setAttribute("aria-hidden", "true");
+
+            nierTransitionCover.classList.remove("is-active", "is-returning");
+        }
+
+        function playNierReturnReveal() {
+            resetNierTransitionState();
+
+            nierTransitionCover.classList.add("is-returning");
+
+            window.setTimeout(() => {
+                nierTransitionCover.classList.remove("is-returning");
+            }, 640);
+        }
+
+        window.addEventListener("pageshow", () => {
+            if (sessionStorage.getItem("nierReturnTransition") === "1") {
+                sessionStorage.removeItem("nierReturnTransition");
+                playNierReturnReveal();
+                return;
+            }
+
+            resetNierTransitionState();
+        });
+
         function createTerminalLine() {
             const line = document.createElement("div");
             line.className = "nier-line";
@@ -828,6 +885,7 @@
                 }, 1800);
             });
         }
+
         nierEgg.addEventListener("click", async () => {
             if (isNierLoading) return;
 
@@ -835,7 +893,7 @@
 
             nierTerminal.textContent = "";
             nierLoader.classList.remove("is-exiting", "is-opening");
-            nierTransitionCover.classList.remove("is-active");
+            nierTransitionCover.classList.remove("is-active", "is-returning");
 
             nierLoader.classList.add("is-active");
             nierLoader.setAttribute("aria-hidden", "false");

@@ -327,6 +327,10 @@
                 });
             });
         }
+
+        window.addEventListener("pagehide", () => {
+            sessionStorage.setItem("nierReturnTransition", "1");
+        });
     </script>
 </head>
 
