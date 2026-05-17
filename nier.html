@@ -11,8 +11,8 @@
     <meta name="theme-color" content="#14110c" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>UNDER CONSTRUCTION</title>
-    <meta name="description" content="Under construction." />
+    <title>Manjul Tamrakar</title>
+    <meta name="description" content="Android engineer and full-stack developer from Kathmandu, Nepal." />
 
     <link rel="stylesheet" href="/public/css/nier-shared.css" />
     <link rel="stylesheet" href="/public/css/nier.css" />
@@ -46,11 +46,693 @@
 </head>
 
 <body>
-    <main>
-        <div class="code">YoRHa Archive Access</div>
-        <h1>UNDER CONSTRUCTION</h1>
-        <p class="subtitle">System module unavailable<span class="cursor">_</span></p>
-    </main>
+    <div class="nier-screen">
+        <main class="main-stage">
+            <h1 class="page-title" id="pageTitle">MAP</h1>
+            <div class="rail left" aria-hidden="true"></div>
+            <div class="rail mid" aria-hidden="true"></div>
+
+            <aside class="side-panel" aria-label="Section filters">
+                <div class="menu-stack" id="sideMenu">
+                    <button class="menu-item is-active" data-target="about">Profile</button>
+                    <button class="menu-item" data-target="experience">Work Log</button>
+                    <button class="menu-item" data-target="projects">Projects</button>
+                    <button class="menu-item" data-target="skills">Tech Set</button>
+                    <button class="menu-item" data-target="community">Community</button>
+                    <button class="menu-item" data-target="contact">Contact</button>
+                    <button class="menu-item" data-target="system">System</button>
+                </div>
+            </aside>
+
+            <section class="center-panel" aria-label="Records">
+                <ul class="record-list" id="recordList"></ul>
+            </section>
+
+            <aside class="detail-panel" aria-label="Details">
+                <div class="detail-head">
+                    <span id="detailTitle">Manjul Tamrakar</span>
+                    <span id="detailLevel">Lv: 56</span>
+                </div>
+
+                <div class="detail-role">
+                    <span id="detailRole">Android Engineer</span>
+                    <span id="detailArea">KTM</span>
+                </div>
+
+                <div class="stat-lines">
+                    <div class="stat-line"><span>Stack:</span><strong id="statStack">Kotlin / Compose</strong></div>
+                    <div class="stat-line"><span>EXP:</span><strong id="statExp">283,208</strong></div>
+                    <div class="hp-row"><span>Focus:</span>
+                        <div class="meter" id="focusMeter"></div><strong id="statFocus">92/100</strong>
+                    </div>
+                    <div class="stat-line"><span>Mobile:</span><strong id="statMobile">4,085</strong></div>
+                    <div class="stat-line"><span>Backend:</span><strong id="statBackend">3,755</strong></div>
+                    <div class="stat-line"><span>Community:</span><strong id="statCommunity">1,699</strong></div>
+                </div>
+
+                <div class="detail-copy" id="detailCopy"></div>
+                <div class="slot-row" aria-hidden="true">
+                    <span class="slot"></span><span class="slot"></span><span class="slot"></span><span
+                        class="slot"></span><span class="slot"></span>
+                    <span class="slot"></span><span class="slot"></span><span class="slot"></span><span
+                        class="slot"></span><span class="slot"></span>
+                </div>
+                <div class="no-error">NO ERROR</div>
+            </aside>
+        </main>
+
+        <footer class="bottom-help">
+            <div class="help-text" id="helpText">Select a profile record.</div>
+            <div class="controls">
+                <span><span class="key">W</span><span class="key">S</span>Move active cursor</span>
+                <span><span class="key">A</span><span class="key">D</span>Switch cursor</span>
+                <span><span class="key">Enter</span>Confirm / Open</span>
+                <span><span class="key">Esc</span>Back</span>
+            </div>
+        </footer>
+        <div class="dots" aria-hidden="true"></div>
+    </div>
+
+    <script>
+        const database = {
+            about: {
+                title: "MAP",
+                help: "Select a profile record.",
+                items: [
+                    {
+                        name: "Manjul Tamrakar",
+                        meta: "CSIT",
+                        role: "Android Engineer",
+                        area: "Lalitpur / Kathmandu",
+                        stack: "Kotlin / Compose / TypeScript",
+                        exp: "283,208",
+                        focus: 92,
+                        mobile: "4,250",
+                        backend: "3,450",
+                        community: "3,900",
+                        copy: "Android Engineer at Veel, focused on mobile applications, web applications, and practical product engineering across Android and full-stack systems."
+                    },
+                    {
+                        name: "Current Focus",
+                        meta: "Veel",
+                        role: "Android Engineer",
+                        area: "Mobile / Video",
+                        stack: "Kotlin / Jetpack Compose",
+                        exp: "201,540",
+                        focus: 90,
+                        mobile: "4,600",
+                        backend: "2,900",
+                        community: "2,800",
+                        copy: "Working on Veel's Video Editing SDK and maintaining the Veel Android app for new features, with emphasis on clean Android UI, native implementation, and reliable feature delivery."
+                    },
+                    {
+                        name: "Education",
+                        meta: "TU",
+                        role: "BSc. CSIT",
+                        area: "Patan Multiple Campus",
+                        stack: "2022 - 2026",
+                        exp: "175,320",
+                        focus: 84,
+                        mobile: "3,500",
+                        backend: "3,000",
+                        community: "3,300",
+                        copy: "Studying Bachelors in Computer Science and Information Technology at Patan Multiple Campus, with an average of around 80% across seven semesters and expected graduation in June 2026."
+                    }
+                ]
+            },
+            experience: {
+                title: "QUESTS",
+                help: "Select a work log.",
+                items: [
+                    {
+                        name: "Veel",
+                        meta: "Present",
+                        role: "Android Engineer",
+                        area: "Android",
+                        stack: "Kotlin / Native Android",
+                        exp: "320,410",
+                        focus: 94,
+                        mobile: "4,700",
+                        backend: "2,700",
+                        community: "2,400",
+                        copy: "Developing Veel's Video Editing SDK and maintaining the Veel Android application, including new product features and native Android implementation."
+                    },
+                    {
+                        name: "COL Thinkspace",
+                        meta: "2024 - 2025",
+                        role: "Front End Developer",
+                        area: "Web / Mobile",
+                        stack: "React / App Architecture",
+                        exp: "146,800",
+                        focus: 82,
+                        mobile: "3,500",
+                        backend: "3,100",
+                        community: "2,700",
+                        copy: "Developed a mobile application, led internal full-stack architecture work, and handled front-end development for the COL Learn website."
+                    },
+                    {
+                        name: "Mindxcape",
+                        meta: "2023 - 2024",
+                        role: "Front End Developer",
+                        area: "Frontend",
+                        stack: "Next.js / MUI",
+                        exp: "126,450",
+                        focus: 80,
+                        mobile: "2,800",
+                        backend: "3,100",
+                        community: "2,300",
+                        copy: "Built the Phase Zero Clothing e-commerce site and internal management dashboards for Boss Adventure Travels and Tours."
+                    }
+                ]
+            },
+            projects: {
+                title: "ITEMS",
+                help: "Select an item to inspect.",
+                items: [
+                    {
+                        name: "Veel Video Editing SDK",
+                        meta: "Android",
+                        role: "SDK / App",
+                        area: "Mobile",
+                        stack: "Kotlin / Compose",
+                        exp: "252,000",
+                        focus: 92,
+                        mobile: "4,650",
+                        backend: "2,500",
+                        community: "1,800",
+                        copy: "Android video editing SDK and app work at Veel, centered on native Android feature development and maintainable mobile product engineering."
+                    },
+                    {
+                        name: "Befit Nepal",
+                        meta: "Mobile",
+                        role: "App Developer",
+                        area: "Attendance / Expense",
+                        stack: "Expo / FCM",
+                        exp: "188,100",
+                        focus: 84,
+                        mobile: "4,100",
+                        backend: "3,100",
+                        community: "2,100",
+                        copy: "Developed attendance and expense management features and implemented Firebase Cloud Messaging for push notifications."
+                    },
+                    {
+                        name: "Phase Zero",
+                        meta: "E-commerce",
+                        role: "Frontend Developer",
+                        area: "Payments / Auth",
+                        stack: "Next.js / Zustand / NextAuth",
+                        exp: "169,300",
+                        focus: 82,
+                        mobile: "2,700",
+                        backend: "3,600",
+                        community: "1,900",
+                        copy: "Built e-commerce functionality with eSewa and Khalti payment integration, plus authentication through NextAuth."
+                    },
+                    {
+                        name: "COL Learn",
+                        meta: "LMS",
+                        role: "Frontend Developer",
+                        area: "Education",
+                        stack: "React / TanStack Query",
+                        exp: "156,700",
+                        focus: 80,
+                        mobile: "2,600",
+                        backend: "3,250",
+                        community: "2,800",
+                        copy: "Learning management system for teachers and learners, including course creation workflows and learning progress tracking."
+                    }
+                ]
+            },
+            skills: {
+                title: "WEAPONS",
+                help: "Select a weapon to equip.",
+                items: [
+                    {
+                        name: "Android Development",
+                        meta: "Lv: 4",
+                        role: "Primary Weapon",
+                        area: "Mobile",
+                        stack: "Kotlin / Jetpack Compose",
+                        exp: "410,000",
+                        focus: 95,
+                        mobile: "4,850",
+                        backend: "2,650",
+                        community: "2,200",
+                        copy: "Primary professional stack for Android feature work, native UI, application maintenance, and SDK development."
+                    },
+                    {
+                        name: "Frontend Engineering",
+                        meta: "Lv: 4",
+                        role: "Web Weapon",
+                        area: "Frontend",
+                        stack: "React / Next.js",
+                        exp: "304,500",
+                        focus: 88,
+                        mobile: "3,100",
+                        backend: "3,000",
+                        community: "2,600",
+                        copy: "Frontend stack covering React.js, Next.js, Astro, Electron.js, Zustand, Redux, Tailwind CSS, Material UI, and Styled Components."
+                    },
+                    {
+                        name: "Mobile Cross-platform",
+                        meta: "Lv: 3",
+                        role: "Support Weapon",
+                        area: "Mobile",
+                        stack: "React Native / Expo",
+                        exp: "210,700",
+                        focus: 78,
+                        mobile: "4,000",
+                        backend: "2,600",
+                        community: "2,300",
+                        copy: "Mobile development experience with React Native, Expo, React Navigation, and Firebase integrations."
+                    },
+                    {
+                        name: "Backend & APIs",
+                        meta: "Lv: 3",
+                        role: "System Weapon",
+                        area: "Backend",
+                        stack: "Node.js / Express / SQL",
+                        exp: "190,200",
+                        focus: 78,
+                        mobile: "2,300",
+                        backend: "4,150",
+                        community: "2,000",
+                        copy: "Backend capability across Node.js, Express.js, MongoDB, PostgreSQL, RESTful APIs, and full-stack application architecture."
+                    },
+                    {
+                        name: "Programming Languages",
+                        meta: "Lv: 3",
+                        role: "Core Stats",
+                        area: "Languages",
+                        stack: "TypeScript / Kotlin / C",
+                        exp: "180,600",
+                        focus: 82,
+                        mobile: "3,600",
+                        backend: "3,400",
+                        community: "2,100",
+                        copy: "Language base includes JavaScript, TypeScript, Kotlin, Python, C, and C++, with TypeScript and Kotlin as the strongest day-to-day tools."
+                    }
+                ]
+            },
+            community: {
+                title: "SKILLS",
+                help: "Select a community skill.",
+                items: [
+                    {
+                        name: "GDG Kathmandu",
+                        meta: "Active",
+                        role: "Technical Lead / Organising Team",
+                        area: "Nepal",
+                        stack: "Community",
+                        exp: "132,900",
+                        focus: 84,
+                        mobile: "3,000",
+                        backend: "2,700",
+                        community: "4,500",
+                        copy: "Active organiser in GDG Kathmandu, helping lead events such as IO Extended Kathmandu and DevFest Kathmandu."
+                    },
+                    {
+                        name: "Technical Events",
+                        meta: "10+",
+                        role: "Organizer",
+                        area: "Kathmandu",
+                        stack: "Workshops / Sessions",
+                        exp: "110,000",
+                        focus: 80,
+                        mobile: "2,700",
+                        backend: "2,600",
+                        community: "4,300",
+                        copy: "Helped successfully execute 10+ technical events with almost 800+ unique participants, including informational and promotional event materials."
+                    },
+                    {
+                        name: "Hackathons",
+                        meta: "Winner",
+                        role: "Builder",
+                        area: "Nepal",
+                        stack: "React Native / Next.js",
+                        exp: "120,000",
+                        focus: 82,
+                        mobile: "3,400",
+                        backend: "3,300",
+                        community: "3,600",
+                        copy: "Winner of SXC Sandbox Hackfest 2024 with an NFC payment platform, and winner of the Environment Track at AI Crusade Hackathon 2023 with a power grid failure prediction system."
+                    }
+                ]
+            },
+            contact: {
+                title: "INTEL",
+                help: "Select a contact route.",
+                items: [
+                    {
+                        name: "GitHub",
+                        meta: "Open",
+                        role: "Code Archive",
+                        area: "External",
+                        stack: "tamrakar182",
+                        exp: "75,000",
+                        focus: 68,
+                        mobile: "3,100",
+                        backend: "2,900",
+                        community: "2,200",
+                        copy: "https://github.com/tamrakar182",
+                        url: "https://github.com/tamrakar182"
+                    },
+                    {
+                        name: "LinkedIn",
+                        meta: "Open",
+                        role: "Professional",
+                        area: "External",
+                        stack: "Manjul Tamrakar",
+                        exp: "66,000",
+                        focus: 70,
+                        mobile: "2,900",
+                        backend: "2,700",
+                        community: "3,100",
+                        copy: "https://www.linkedin.com/in/manjul-tamrakar/",
+                        url: "https://www.linkedin.com/in/manjul-tamrakar/"
+                    },
+                    {
+                        name: "Website",
+                        meta: "Open",
+                        role: "Portfolio",
+                        area: "External",
+                        stack: "manjultamrakar.com.np",
+                        exp: "58,000",
+                        focus: 72,
+                        mobile: "2,800",
+                        backend: "2,700",
+                        community: "2,900",
+                        copy: "https://manjultamrakar.com.np",
+                        url: "https://manjultamrakar.com.np"
+                    },
+                    {
+                        name: "Email",
+                        meta: "Direct",
+                        role: "Contact",
+                        area: "Mail",
+                        stack: "Email",
+                        exp: "50,000",
+                        focus: 70,
+                        mobile: "2,000",
+                        backend: "2,000",
+                        community: "2,500",
+                        copy: "manjultamrakar4@gmail.com",
+                        url: "mailto:manjultamrakar4@gmail.com"
+                    }
+                ]
+            },
+            system: {
+                title: "SYSTEM",
+                help: "Review system status.",
+                items: [
+                    {
+                        name: "Archive Status",
+                        meta: "OK",
+                        role: "Personal Site",
+                        area: "Build",
+                        stack: "Single HTML",
+                        exp: "2026.05",
+                        focus: 100,
+                        mobile: "Stable",
+                        backend: "Stable",
+                        community: "Stable",
+                        copy: "Interface mode: NieR Automata-inspired portfolio archive. Navigation swaps sections in place with no page scrolling."
+                    },
+                    {
+                        name: "Profile Source",
+                        meta: "Synced",
+                        role: "CV / GitHub / LinkedIn",
+                        area: "Content",
+                        stack: "Portfolio Data",
+                        exp: "2026",
+                        focus: 94,
+                        mobile: "Updated",
+                        backend: "Updated",
+                        community: "Updated",
+                        copy: "Content updated around Android engineering at Veel, CSIT education, project history, GDG Kathmandu leadership, hackathon wins, and contact routes."
+                    },
+                    {
+                        name: "Region",
+                        meta: "KTM",
+                        role: "Lalitpur / Kathmandu",
+                        area: "Nepal",
+                        stack: "GMT+5:45",
+                        exp: "44600",
+                        focus: 84,
+                        mobile: "Local",
+                        backend: "Remote",
+                        community: "Active",
+                        copy: "Local developer signal: Android engineering, web systems, technical events, hackathons, and developer community work in Nepal."
+                    }
+                ]
+            }
+        };
+
+        const sideButtons = [...document.querySelectorAll(".menu-item")];
+        const recordList = document.getElementById("recordList");
+        const pageTitle = document.getElementById("pageTitle");
+        const helpText = document.getElementById("helpText");
+        const focusMeter = document.getElementById("focusMeter");
+
+        const sectionKeys = Object.keys(database);
+
+        let currentSection = "about";
+        let currentSectionIndex = sectionKeys.indexOf(currentSection);
+        let currentIndex = 0;
+
+        // "side" = right-most section cursor
+        // "records" = middle record cursor
+        let activeCursor = "side";
+
+        function setActiveCursor(cursor) {
+            activeCursor = cursor;
+
+            document.body.classList.toggle("cursor-side-active", activeCursor === "side");
+            document.body.classList.toggle("cursor-records-active", activeCursor === "records");
+
+            updateCursorVisibility();
+            updateHelpText();
+        }
+
+        function updateCursorVisibility() {
+            sideButtons.forEach((button, index) => {
+                button.classList.toggle(
+                    "is-cursor",
+                    activeCursor === "side" && index === currentSectionIndex
+                );
+            });
+
+            [...document.querySelectorAll(".record-item")].forEach((button, index) => {
+                button.classList.toggle(
+                    "is-cursor",
+                    activeCursor === "records" && index === currentIndex
+                );
+            });
+        }
+
+        function updateHelpText() {
+            if (activeCursor === "side") {
+                helpText.textContent = "Select a section.";
+                return;
+            }
+
+            helpText.textContent = database[currentSection].help;
+        }
+
+        function renderRecords(section) {
+            const data = database[section];
+            recordList.innerHTML = "";
+
+            data.items.forEach((item, index) => {
+                const li = document.createElement("li");
+                const button = document.createElement("button");
+
+                button.type = "button";
+                button.className = "record-item";
+                button.innerHTML = `<span>${item.name}</span><span class="meta">${item.meta}</span>`;
+
+                // Mouse click opens/directly selects the record regardless of active keyboard cursor.
+                button.addEventListener("click", () => {
+                    activeCursor = "records";
+                    selectRecord(index);
+                    setActiveCursor("records");
+                    openRecord(database[currentSection].items[index]);
+                });
+
+                li.appendChild(button);
+                recordList.appendChild(li);
+            });
+
+            updateRecordStates();
+        }
+
+        function renderDetail() {
+            const data = database[currentSection];
+            const item = data.items[currentIndex] || data.items[0];
+
+            document.getElementById("detailTitle").textContent = item.name;
+            document.getElementById("detailLevel").textContent = item.meta;
+            document.getElementById("detailRole").textContent = item.role;
+            document.getElementById("detailArea").textContent = item.area;
+            document.getElementById("statStack").textContent = item.stack;
+            document.getElementById("statExp").textContent = item.exp;
+            document.getElementById("statFocus").textContent = `${item.focus}/100`;
+            document.getElementById("statMobile").textContent = item.mobile;
+            document.getElementById("statBackend").textContent = item.backend;
+            document.getElementById("statCommunity").textContent = item.community;
+
+            const detailCopy = document.getElementById("detailCopy");
+
+            if (item.url) {
+                detailCopy.innerHTML = `<a href="${item.url}" target="_blank" rel="noopener noreferrer">${item.copy}</a>`;
+            } else {
+                detailCopy.textContent = item.copy;
+            }
+
+            focusMeter.style.setProperty("--meter", `${item.focus}%`);
+
+            updateRecordStates();
+            updateCursorVisibility();
+        }
+
+        function updateSideStates() {
+            sideButtons.forEach((btn, index) => {
+                const section = sectionKeys[index];
+
+                btn.classList.toggle("is-active", section === currentSection);
+                btn.classList.toggle(
+                    "is-cursor",
+                    activeCursor === "side" && index === currentSectionIndex
+                );
+            });
+        }
+
+        function updateRecordStates() {
+            [...document.querySelectorAll(".record-item")].forEach((button, index) => {
+                button.classList.toggle("is-active", index === currentIndex);
+                button.classList.toggle(
+                    "is-cursor",
+                    activeCursor === "records" && index === currentIndex
+                );
+            });
+        }
+
+        function previewSection(section) {
+            if (!database[section]) return;
+
+            currentSection = section;
+            currentSectionIndex = sectionKeys.indexOf(section);
+            currentIndex = 0;
+
+            const data = database[section];
+
+            pageTitle.textContent = data.title;
+
+            updateSideStates();
+            renderRecords(section);
+            renderDetail();
+            updateHelpText();
+        }
+
+        function confirmSection() {
+            const section = sectionKeys[currentSectionIndex];
+            previewSection(section);
+
+            // After choosing a section, keyboard cursor moves into the middle records panel.
+            setActiveCursor("records");
+        }
+
+        function selectRecord(index) {
+            const count = database[currentSection].items.length;
+            currentIndex = ((index % count) + count) % count;
+            renderDetail();
+        }
+
+        function openRecord(item) {
+            if (item?.url) {
+                window.open(item.url, "_blank", "noopener,noreferrer");
+            }
+        }
+
+        sideButtons.forEach((button, index) => {
+            button.addEventListener("click", () => {
+                currentSectionIndex = index;
+                previewSection(button.dataset.target);
+
+                // Mouse click on section should directly open/select that section
+                // and move cursor into the middle record list.
+                setActiveCursor("records");
+            });
+        });
+
+        window.addEventListener("keydown", (event) => {
+            const key = event.key.toLowerCase();
+
+            if (
+                ["arrowdown", "arrowup", "arrowleft", "arrowright", "w", "s", "a", "d", "enter", "escape"].includes(key)
+            ) {
+                event.preventDefault();
+            }
+
+            if (key === "arrowright" || key === "d") {
+                setActiveCursor("records");
+                return;
+            }
+
+            if (key === "arrowleft" || key === "a") {
+                setActiveCursor("side");
+                return;
+            }
+
+            if (key === "escape") {
+                setActiveCursor("side");
+                return;
+            }
+
+            if (activeCursor === "side") {
+                const sectionCount = sectionKeys.length;
+
+                if (key === "arrowdown" || key === "s") {
+                    currentSectionIndex = (currentSectionIndex + 1) % sectionCount;
+                    previewSection(sectionKeys[currentSectionIndex]);
+                    return;
+                }
+
+                if (key === "arrowup" || key === "w") {
+                    currentSectionIndex = (currentSectionIndex - 1 + sectionCount) % sectionCount;
+                    previewSection(sectionKeys[currentSectionIndex]);
+                    return;
+                }
+
+                if (key === "enter") {
+                    confirmSection();
+                    return;
+                }
+            }
+
+            if (activeCursor === "records") {
+                const count = database[currentSection].items.length;
+
+                if (key === "arrowdown" || key === "s") {
+                    selectRecord(currentIndex + 1);
+                    return;
+                }
+
+                if (key === "arrowup" || key === "w") {
+                    selectRecord(currentIndex - 1);
+                    return;
+                }
+
+                if (key === "enter") {
+                    openRecord(database[currentSection].items[currentIndex]);
+                    return;
+                }
+            }
+        });
+
+        previewSection("about");
+        setActiveCursor("side");
+    </script>
 </body>
 
 </html>
